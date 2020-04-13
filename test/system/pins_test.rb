@@ -12,7 +12,7 @@ class PinsTest < ApplicationSystemTestCase
 
   test "creating a Pin" do
     visit pins_url
-    click_on "New Pin"
+    click_on ""
 
     fill_in "Description", with: @pin.description
     click_on "Create Pin"
