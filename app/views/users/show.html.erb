@@ -1,0 +1,54 @@
+<div>
+   <%= image_tag @user.avatar.url(:thumb) %>
+<h3><%= @user.username %></h3>
+<p><%= @user.bio %></p>
+
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
+
+<style>
+  .container {
+    max-width: 1700px;
+  }
+  .grid-item { 
+    margin-bottom:10px;
+    margin-left:  
+    font-size:1rem;
+    /* background-color: #EEEEEE; */
+      }
+</style>
+</head>
+
+
+<body>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <div class="container">
+    <div class="row grid">
+        <% @user.pins.each do |pin| %>
+          <div class="col-sm-5 col-md-2 grid-item">
+            <div class="card bg-light border-dark mb-1" style="max-width: 20rem;">
+              <%= link_to(pin) { image_tag pin.pin_image.url(:medium), class: 'img-fluid'} %>
+              <div class="card-body px-1 py-2">
+                  <p><strong><%= link_to pin.user.username, user_path(pin.user.username) %></strong></p>
+                  <p class="card-title"><p><%= pin.description %><p></p>
+                  <%# <p class="card-text">コンテンツ コンテンツ コンテンツ コンテンツ</p> %>
+                <% if pin.user == current_user %>
+                  <p class="mb-0"><%= link_to 'Edit', edit_pin_path(pin) %> | <%= link_to 'Delete', pin, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+    </div>
+  </div>
+<script>
+  var $container = jQuery('.grid').imagesLoaded(function(){
+  $container.masonry({
+  itemSelector: '.grid-item'
+  });
+  });
+</script>
+<body>
