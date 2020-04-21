@@ -23,7 +23,7 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
-          <li class="nav-item"><a class="nav-link" href= "/pins/new">New Pin</a></li>
+          <li class="nav-item"><a class="nav-link" href= "/pins/new">Post</a></li>
           <li class="nav-item"><a class="nav-link" href="/users/edit"> Edit Profile </a></li>
           <li class="nav-item"><%= link_to("Logout", "/users/sign_out", {method: "delete", class: "nav-link"}) %></li>
         <% else %>
